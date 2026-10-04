@@ -60,6 +60,15 @@ dans `includes/functions.php`).
 - Aucune nouvelle table n'était nécessaire : `availability_slots` et `bookings.slot_id` existaient déjà
   dans le schéma initial.
 
+## Créer le compte administrateur (admin/setup.php)
+Un script à usage unique génère le premier compte admin sans avoir besoin de PHP en ligne de commande :
+1. Ouvrez `admin/setup.php` et changez la valeur de `SETUP_KEY` pour une chaîne secrète de votre choix.
+2. Uploadez (ou déployez via Git) puis ouvrez `https://kalinzagroup.com/admin/setup.php?key=VOTRE_CLE_SECRETE`.
+3. Remplissez le formulaire (nom, e-mail, mot de passe) — le compte est créé avec le rôle `admin`.
+4. **Supprimez immédiatement `admin/setup.php` du serveur** (le script refuse de créer un second compte
+   si la table `users` n'est plus vide, mais autant ne pas le laisser traîner).
+5. Connectez-vous sur `https://kalinzagroup.com/admin/login.php`.
+
 ## Déploiement sur Hostinger
 1. Dans hPanel, créer une base de données MySQL et un utilisateur associé.
 2. Importer `database/schema.sql` via phpMyAdmin.
